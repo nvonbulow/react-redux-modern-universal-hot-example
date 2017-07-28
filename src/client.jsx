@@ -9,7 +9,7 @@ import createStore from './redux/create';
 
 const reactRoot = document.getElementById('app');
 const history = createBrowserHistory();
-const store = createStore(history, window.__data);
+const store = createStore(history, window.__PRELOADED_STATE__);
 
 const renderRootElement = (Container) => {
   ReactDOM.render(
@@ -24,9 +24,6 @@ renderRootElement(RootContainer);
 
 if(process.env.NODE_ENV !== 'production') {
   window.React = React;
-  if(!reactRoot || !reactRoot.firstChild || !reactRoot.firstChild.attributes || !reactRoot.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code');
-  }
 }
 
 if(__DEVELOPMENT__ && __CLIENT__ && module.hot) {

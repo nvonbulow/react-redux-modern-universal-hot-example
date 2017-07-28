@@ -1,3 +1,3 @@
 
-export Home from './Home/Home';
-export NotFound from './NotFound/NotFound';
+export * from './layout';
+export * from './pages';
