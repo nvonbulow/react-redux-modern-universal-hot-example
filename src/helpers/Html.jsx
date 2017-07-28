@@ -34,7 +34,7 @@ export default class Html extends React.Component {
           <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
           {
             store &&
-              <script dangerouslySetInnerHTML={{ __html: `window._data=${serialize(store.getState())};` }} />
+              <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__=${serialize(store.getState())};` }} />
           }
           {
             Object.keys(assets.javascript).map((script, key) =>

@@ -9,7 +9,7 @@ import createStore from './redux/create';
 
 const reactRoot = document.getElementById('app');
 const history = createBrowserHistory();
-const store = createStore(history, window.__data);
+const store = createStore(history, window.__PRELOADED_STATE__);
 
 const renderRootElement = (Container) => {
   ReactDOM.render(

@@ -28,7 +28,7 @@ const apiProxy = httpProxy.createProxyServer({
 
 app.use(compression());
 
-app.use('/assets', Express.static(path.join(__dirname, '../dist'), {
+app.use('/assets', Express.static(path.join(__dirname, '../dist/assets'), {
   dotfiles: 'ignore',
   etag: true,
   index: false,

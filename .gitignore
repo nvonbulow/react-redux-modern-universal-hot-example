@@ -57,8 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
-# Webpack output directory
+# Webpack output files
 dist/
+webpack-assets.json
 
 # WebStorm Project files
 .idea/
