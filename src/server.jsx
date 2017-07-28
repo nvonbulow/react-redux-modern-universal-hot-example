@@ -63,7 +63,7 @@ app.use(async (req, res) => {
     webpackIsomorphicTools.refresh();
   }
   const hydrateOnClient = () => {
-    const html = ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} />);
+    const html = ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} />);
     res.send(`<!doctype html>\n${html}`);
   };
 
@@ -90,7 +90,7 @@ app.use(async (req, res) => {
     res.redirect(302, context.url);
   }
   else {
-    const html = ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={rootContainer} store={store} />);
+    const html = ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} component={rootContainer} store={store} />);
     res.send(`<!doctype html>\n${html}`);
   }
 });

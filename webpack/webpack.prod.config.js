@@ -12,15 +12,13 @@ var OptimizeCssPlugin = require('optimize-css-assets-webpack-plugin');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools'));
 
-var host = (process.env.HOST || 'localhost');
-var port = (+process.env.PORT + 1) || 3001;
 
 var projectRoot = path.resolve(__dirname, '..');
 var outputPath = path.resolve(projectRoot, './dist');
 
 var assetsPath = 'assets';
 
-var bootstrapConfig = './src/theme/bootstrap/bootstrap.config.js';
+var bootstrapConfig = './.bootstraprc';
 
 module.exports = {
   devtool: 'source-map',
@@ -146,11 +144,6 @@ module.exports = {
       __SERVER__: false,
       __DEVELOPMENT__: false,
       __DEVTOOLS__: false
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
     }),
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
 

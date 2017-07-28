@@ -7,16 +7,26 @@ var compiler = webpack(webpackConfig);
 
 var host = config.host || 'localhost';
 var port = (Number(config.port) + 1) || 3001;
+
 var serverOptions = {
   contentBase: `http://${host}:${port}`,
-  quiet: false,
-  noInfo: false,
+  quiet: true,
+  noInfo: true,
   hot: true,
   inline: true,
   lazy: false,
   publicPath: webpackConfig.output.publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' },
-  stats: { colors: true }
+  stats: {
+    // Save the console from clutter
+    assets: false,
+    colors: true,
+    version: false,
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false
+  }
 };
 
 var app = new Express();

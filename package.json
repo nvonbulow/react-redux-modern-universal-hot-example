@@ -88,7 +88,6 @@
     "express": "^4.15.3",
     "history": "^4.6.3",
     "http-proxy": "^1.16.2",
-    "jquery": "^3.2.1",
     "piping": "^1.0.0-rc.4",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.5.10",

@@ -12,7 +12,7 @@ var outputPath = path.resolve(__dirname, '../dist');
 var WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 var webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./isomorphic-tools'));
 
-var bootstrapConfig = './src/theme/bootstrap/bootstrap.config.js';
+var bootstrapConfig = './.bootstraprc';
 
 module.exports = {
   devtool: 'source-map',
@@ -125,11 +125,6 @@ module.exports = {
       __SERVER__: false,
       __DEVELOPMENT__: true,
       __DEVTOOLS__: true
-    }),
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery'
     }),
     webpackIsomorphicToolsPlugin.development()
   ]

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router';
-import { Home, NotFound } from 'components';
+import { Home, NotFound } from 'components/pages/index';
 
 export default (
   <Switch>
