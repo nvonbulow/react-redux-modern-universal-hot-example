@@ -1,9 +1,6 @@
 /* eslint-disable no-var */
-require('babel-polyfill');
-
 var webpack = require('webpack');
 var path = require('path');
-var fs = require('fs');
 
 var host = (process.env.HOST || 'localhost');
 var port = (+process.env.PORT + 1) || 3001;

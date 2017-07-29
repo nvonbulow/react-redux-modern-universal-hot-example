@@ -8,7 +8,7 @@ export default class Header extends React.Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            Brandin
+            Branding
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>

@@ -1,9 +1,7 @@
 /* eslint-disable no-var */
-require('babel-polyfill');
 
 var webpack = require('webpack');
 var path = require('path');
-var fs = require('fs');
 
 var UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');

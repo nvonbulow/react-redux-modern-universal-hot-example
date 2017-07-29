@@ -14,5 +14,4 @@ cache:
 script:
   - npm run lint
   - npm run build
-  # TODO: add testing with KarmaJS
-  # TODO: add depcheck testing (with KarmaJS?)
+  # Change script to `npm test` when tests are all written
