@@ -18,14 +18,19 @@ var serverOptions = {
   publicPath: webpackConfig.output.publicPath,
   headers: { 'Access-Control-Allow-Origin': '*' },
   stats: {
-    // Save the console from clutter
+    // Hopefully reduced clutter
     assets: false,
-    colors: true,
-    version: false,
-    hash: false,
-    timings: true,
+    cached: false,
     chunks: false,
-    chunkModules: false
+    colors: true,
+    depth: false,
+    entrypoints: false,
+    errors: false, // These are shown in the browser
+    errorDetails: true,
+    hash: false,
+    modules: false,
+    publicPath: false,
+    warnings: true
   }
 };
 
