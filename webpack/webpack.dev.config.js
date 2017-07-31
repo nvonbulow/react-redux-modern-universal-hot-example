@@ -35,8 +35,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
+        use: {
+          loader: 'graphql-tag/loader'
+        }
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: [
+          /node_modules/
+        ],
         use: ['babel-loader', 'eslint-loader']
       },
       {

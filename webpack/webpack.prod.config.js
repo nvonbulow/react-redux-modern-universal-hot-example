@@ -119,6 +119,12 @@ module.exports = {
             outputPath: `${assetsPath}/`
           }
         }
+      },
+      ,
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        use: 'graphql-tag/loader'
       }
     ]
   },

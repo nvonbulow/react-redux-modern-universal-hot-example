@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { ConnectedRouter } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
+import { ApolloClient } from 'react-apollo';
 
 import RootContainer from './containers/Root/Root';
 import createStore from './redux/create';
 
 const reactRoot = document.getElementById('app');
 const history = createBrowserHistory();
-const store = createStore(history, window.__PRELOADED_STATE__);
+const apiClient = new ApolloClient();
+const store = createStore(history, apiClient, window.__PRELOADED_STATE__);
 
 const renderRootElement = (Container) => {
   ReactDOM.render(
     <AppContainer>
-      <Container store={store} history={history} Router={ConnectedRouter} />
+      <Container client={apiClient} store={store} history={history} Router={ConnectedRouter} />
     </AppContainer>,
     reactRoot
   );

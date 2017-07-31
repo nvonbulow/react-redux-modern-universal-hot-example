@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 
-export default (history, data) => {
+export default (history, apiClient, data) => {
   const reduxRouterMiddleware = routerMiddleware(history);
   const middleware = [reduxRouterMiddleware];
 
@@ -19,7 +19,7 @@ export default (history, data) => {
     finalCreateStore = applyMiddleware(...middleware)(createStore);
   }
 
-  const reducer = require('./modules/reducer');
+  const reducer = require('./modules/reducer')(apiClient);
   const store = finalCreateStore(reducer, data);
   if(__DEVELOPMENT__ && module.hot) {
     module.hot.accept('./modules/reducer', () => {

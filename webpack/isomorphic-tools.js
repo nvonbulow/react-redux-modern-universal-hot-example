@@ -42,6 +42,9 @@ module.exports = {
         }
         return module.source;
       }
+    },
+    graphql_query: {
+      extensions: ['graphql', 'gql'],
     }
   }
 };

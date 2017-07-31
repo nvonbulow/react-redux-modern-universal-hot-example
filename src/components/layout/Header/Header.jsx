@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
+import { LinkContainer, IndexLinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 export default class Header extends React.Component {
@@ -12,16 +12,21 @@ export default class Header extends React.Component {
           </Navbar.Brand>
         </Navbar.Header>
         <Nav>
-          <LinkContainer to="/">
+          <IndexLinkContainer to="/">
             <NavItem eventKey={1}>
               Home
             </NavItem>
-          </LinkContainer>
+          </IndexLinkContainer>
           <NavDropdown eventKey={2} title="Dropdown" id="nav-dropdown-menu">
             <MenuItem eventKey={2.1}>Dropdown Item</MenuItem>
             <MenuItem divider />
             <MenuItem eventKey={2.2}>Another one</MenuItem>
           </NavDropdown>
+          <LinkContainer to="/users">
+            <NavItem eventKey={3}>
+              Users
+            </NavItem>
+          </LinkContainer>
         </Nav>
       </Navbar>
     );

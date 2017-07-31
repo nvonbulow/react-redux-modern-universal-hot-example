@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-// import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import Express from 'express';
 import httpProxy from 'http-proxy';
 import compression from 'compression';
 import path from 'path';
 import http from 'http';
 import { createMemoryHistory } from 'history';
+import { ApolloClient, ApolloProvider, getDataFromTree, createNetworkInterface } from 'react-apollo';
 
 import { StaticRouter } from 'react-router';
-import { Provider } from 'react-redux';
 import { App } from 'containers';
 import routes from 'routes';
+
 import createStore from './redux/create';
 import Html from './helpers/Html';
 import config from './config';
@@ -35,8 +35,8 @@ app.use('/assets', Express.static(path.join(__dirname, '../dist/assets'), {
   maxAge: 86400000
 }));
 
-app.use('/api', (req, res) => {
-  apiProxy.web(req, res, { target: apiUrl });
+app.use('/graphql', (req, res) => {
+  apiProxy.web(req, res, { target: `${apiUrl}/graphql` });
 });
 
 app.use('/ws', (req, res) => {
@@ -73,23 +73,36 @@ app.use(async (req, res) => {
   }
 
   const memoryHistory = createMemoryHistory();
-  const store = createStore(memoryHistory);
+  const apiClient = new ApolloClient({
+    ssrMode: true,
+    networkInterface: createNetworkInterface({
+      uri: `${apiUrl}/graphql`
+    })
+  });
+  const store = createStore(memoryHistory, apiClient);
   const context = {};
 
   const rootContainer = (
-    <Provider store={store} key="provider">
+    <ApolloProvider client={apiClient} store={store} key="provider">
       <StaticRouter location={req.url} history={memoryHistory} context={context}>
         <App>
           { routes }
         </App>
       </StaticRouter>
-    </Provider>
+    </ApolloProvider>
   );
   // Currently this doesn't work for some reason
   if(context.url) {
     res.redirect(302, context.url);
   }
   else {
+    try {
+      await getDataFromTree(rootContainer);
+    }
+    catch(err) {
+      console.error('Failed to fetch from API');
+      console.error(err);
+    }
     const html = ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} component={rootContainer} store={store} />);
     res.send(`<!doctype html>\n${html}`);
   }
