@@ -6,9 +6,11 @@ import serialize from 'serialize-javascript';
 
 export default class Html extends React.Component {
   render() {
-    const { assets, component, store } = this.props;
+    const { assets, component, store, client } = this.props;
     const content = component ? ReactDOM.renderToString(component) : '';
     const head = Helmet.rewind();
+    const state = store.getState();
+    state.apollo = client.getInitialState();
 
     return (
       <html lang="en-US">
@@ -34,7 +36,7 @@ export default class Html extends React.Component {
           <div id="app" dangerouslySetInnerHTML={{ __html: content }} />
           {
             store &&
-              <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__=${serialize(store.getState())};` }} />
+              <script dangerouslySetInnerHTML={{ __html: `window.__PRELOADED_STATE__=${serialize(state)};` }} />
           }
           {
             Object.keys(assets.javascript).map((script, key) =>
@@ -52,12 +54,11 @@ Html.propTypes = {
     styles: PropTypes.objectOf(PropTypes.string),
     javascript: PropTypes.objectOf(PropTypes.string)
   }),
-  component: PropTypes.node,
-  store: PropTypes.object
+  component: PropTypes.node.isRequired,
+  store: PropTypes.object.isRequired,
+  client: PropTypes.object.isRequired
 };
 
 Html.defaultProps = {
   assets: { styles: [], javascript: [] },
-  component: null,
-  store: null
 };

@@ -103,7 +103,7 @@ app.use(async (req, res) => {
       console.error('Failed to fetch from API');
       console.error(err);
     }
-    const html = ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} component={rootContainer} store={store} />);
+    const html = ReactDOM.renderToStaticMarkup(<Html assets={webpackIsomorphicTools.assets()} component={rootContainer} store={store} client={apiClient} />);
     res.send(`<!doctype html>\n${html}`);
   }
 });

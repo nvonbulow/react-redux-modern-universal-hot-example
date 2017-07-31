@@ -10,7 +10,9 @@ import createStore from './redux/create';
 
 const reactRoot = document.getElementById('app');
 const history = createBrowserHistory();
-const apiClient = new ApolloClient();
+const apiClient = new ApolloClient({
+  initialState: { apollo: window.__PRELOADED_STATE__.apollo }
+});
 const store = createStore(history, apiClient, window.__PRELOADED_STATE__);
 
 const renderRootElement = (Container) => {
